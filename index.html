@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #ffe4e6;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .container img {
+            width: 200px;
+        }
+
+        h1 {
+            color: #e74c3c;
+            margin: 20px 0;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        #yes-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #no-btn {
+            background: #888;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .success-container {
+            display: none;
+            text-align: center;
+        }
+
+        .success-container img {
+            width: 300px;
+        }
+
+        .success-container h2 {
+            color: #e74c3c;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="question-container">
+        <img src="https://media.giphy.com/media/ZBQhoZC0nqknSviPqT/giphy.gif" alt="Minion with heart">
+        <h1>Will you be my Valentine?</h1>
+        <div class="buttons">
+            <button id="yes-btn">Yes</button>
+            <button id="no-btn">No</button>
+        </div>
+    </div>
+
+    <div class="success-container" id="success-container">
+        <img src="https://media.giphy.com/media/26tOZ42Mg6pbTUPHW/giphy.gif" alt="Fireworks">
+        <h2>See you at 7 ;)</h2>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yes-btn');
+        const noBtn = document.getElementById('no-btn');
+        const questionContainer = document.getElementById('question-container');
+        const successContainer = document.getElementById('success-container');
+
+        const noTexts = [
+            "Are you sure?",
+            "Really sure?",
+            "Baby please",
+            "Think again...",
+            "Pretty please?",
+            "Don't do this to me",
+            "I'll be sad...",
+            "Give me a chance!",
+            "Last chance"
+        ];
+
+        let noClickCount = 0;
+        let yesScale = 1;
+
+        noBtn.addEventListener('click', () => {
+            if (noClickCount < noTexts.length) {
+                noBtn.textContent = noTexts[noClickCount];
+                noClickCount++;
+                
+                yesScale += 0.3;
+                yesBtn.style.transform = `scale(${yesScale})`;
+            }
+            
+            if (noClickCount >= noTexts.length) {
+                noBtn.style.display = 'none';
+            }
+        });
+
+        yesBtn.addEventListener('click', () => {
+            questionContainer.style.display = 'none';
+            successContainer.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
